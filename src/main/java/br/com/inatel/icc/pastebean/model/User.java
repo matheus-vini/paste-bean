@@ -13,11 +13,14 @@ public class User {
 	private static long idCount = 0;
 	@Id
 	private long id;
-	@ElementCollection
-	private List<Paste> userPasteList;
 	private String username;
 	private String password;
+	@ElementCollection
+	private List<Paste> userPasteList;
 
+	// Blank constructor
+	public User() {}
+	
 	public User(String username, String password) {
 		setId(++idCount);
 		userPasteList = new ArrayList<Paste>();

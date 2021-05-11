@@ -12,13 +12,16 @@ public class Paste {
 	private static long idCount = 0;
 	@Id
 	private long id;
-	private String content;
-	private String title;
 	@ManyToOne
 	private User user;
+	private String title;
+	private String content;
 	@Enumerated(EnumType.STRING)
 	private PastePrivacy privacy;
 
+	// Blank constructor
+	public Paste() {}
+	
 	// Constructor without assigned user
 	public Paste(PastePrivacy privacy, String title, String content) {
 		setId(++idCount);
