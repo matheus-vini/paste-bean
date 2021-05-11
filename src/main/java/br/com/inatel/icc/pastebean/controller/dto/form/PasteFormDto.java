@@ -1,9 +1,10 @@
-package br.com.inatel.icc.pastebean.controller.dto;
+package br.com.inatel.icc.pastebean.controller.dto.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.inatel.icc.pastebean.controller.dto.UserDto;
 import br.com.inatel.icc.pastebean.model.Paste;
 import br.com.inatel.icc.pastebean.model.PastePrivacy;
 

@@ -47,17 +47,25 @@ public class Paste {
 	private void setId(long id) {
 		this.id = id;
 	}
-
-	public String getContent() {
-		return content;
+	
+	public User getUser() {
+		return user;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
 
-	public User getUser() {
-		return user;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public PastePrivacy getPrivacy() {
