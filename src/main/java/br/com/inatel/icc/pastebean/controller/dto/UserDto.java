@@ -4,10 +4,11 @@ import br.com.inatel.icc.pastebean.model.User;
 
 public class UserDto {
 
-	private String username;
+	private String username = "@nonymous";
 
 	public UserDto (User user) {
-		this.username = user.getUsername();
+		if(user != null)
+			this.username = user.getUsername();
 	}
 	
 	public String getUsername() {

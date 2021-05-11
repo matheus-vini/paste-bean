@@ -8,7 +8,7 @@ import br.com.inatel.icc.pastebean.model.Paste;
 public class PasteDto {
 
 	private long id;
-	private UserDto user;
+	private UserDto user = null;
 	private String title;
 	private String content;
 
@@ -16,7 +16,8 @@ public class PasteDto {
 		this.id = paste.getId();
 		this.title = paste.getTitle();
 		this.content = paste.getContent();
-		this.user = new UserDto(paste.getUser());
+		if(paste.getUser() != null)
+			this.user = new UserDto(paste.getUser());
 	}
 	
 	public long getId() {
