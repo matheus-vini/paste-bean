@@ -1,5 +1,9 @@
 package br.com.inatel.icc.pastebean.controller.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import br.com.inatel.icc.pastebean.model.Paste;
 import br.com.inatel.icc.pastebean.model.PastePrivacy;
 
@@ -7,7 +11,9 @@ public class PasteFormDto {
 
 	private long id;
 	private UserDto user;
+	@NotNull @NotEmpty @Size(min = 3)
 	private String title;
+	@NotNull @NotEmpty
 	private String content;
 	private PastePrivacy privacy;
 

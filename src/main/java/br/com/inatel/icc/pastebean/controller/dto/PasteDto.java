@@ -16,8 +16,7 @@ public class PasteDto {
 		this.id = paste.getId();
 		this.title = paste.getTitle();
 		this.content = paste.getContent();
-		if(paste.getUser() != null)
-			this.user = new UserDto(paste.getUser());
+		this.user = new UserDto(paste.getUser());
 	}
 	
 	public long getId() {
