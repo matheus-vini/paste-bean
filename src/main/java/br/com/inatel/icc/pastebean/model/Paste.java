@@ -1,12 +1,22 @@
 package br.com.inatel.icc.pastebean.model;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Paste {
 
 	private static long idCount = 0;
+	@Id
 	private long id;
 	private String content;
 	private String title;
+	@ManyToOne
 	private User user;
+	@Enumerated(EnumType.STRING)
 	private PastePrivacy privacy;
 
 	// Constructor without assigned user
@@ -31,7 +41,7 @@ public class Paste {
 		return id;
 	}
 
-	public void setId(long id) {
+	private void setId(long id) {
 		this.id = id;
 	}
 

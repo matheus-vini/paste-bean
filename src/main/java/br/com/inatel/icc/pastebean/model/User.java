@@ -3,10 +3,17 @@ package br.com.inatel.icc.pastebean.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
-	private static long idCount = 0; 
+	private static long idCount = 0;
+	@Id
 	private long id;
+	@ElementCollection
 	private List<Paste> userPasteList;
 	private String username;
 	private String password;
@@ -22,7 +29,7 @@ public class User {
 		return id;
 	}
 
-	public void setId(long id) {
+	private void setId(long id) {
 		this.id = id;
 	}
 
