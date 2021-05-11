@@ -15,7 +15,7 @@ public class PracticeController {
 	public String hello() {
 		
 		String returnMessage = "Hello World!<br><br>";
-		
+/*
 		PastePrivacy paste1Privacy = PastePrivacy.PUBLIC;
 		String paste1Title = "Bob Bobbington's Paste";
 		String paste1Content = "Bobbington is a village and civil parish in the South Staffordshire district of "
@@ -47,7 +47,7 @@ public class PracticeController {
 		
 		returnMessage += (paste2.getTitle() + "<br>");
 		returnMessage += (paste2.getContent() + "<br>");
-		
+*/
 		return returnMessage;
 	}
 
