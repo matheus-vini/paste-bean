@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +55,18 @@ public class UserController {
 		if(optional.isPresent()) {
 			User user = userForm.update(id, userRepository);
 			return ResponseEntity.ok(new UserDto(user));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("{id}")
+	@Transactional
+	public ResponseEntity<?> deleteUsers(@PathVariable Long id){
+		Optional<User> optional = userRepository.findById(id);
+		if(optional.isPresent()) {
+			userRepository.deleteById(id);
+			return ResponseEntity.ok().build();
 		}
 		
 		return ResponseEntity.notFound().build();
