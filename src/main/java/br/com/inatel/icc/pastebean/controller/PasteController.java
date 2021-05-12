@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.inatel.icc.pastebean.controller.dto.PasteDto;
-import br.com.inatel.icc.pastebean.controller.dto.form.PasteFormDto;
-import br.com.inatel.icc.pastebean.controller.dto.form.UpdatePasteFormDto;
+import br.com.inatel.icc.pastebean.controller.form.PasteForm;
+import br.com.inatel.icc.pastebean.controller.form.UpdatePasteForm;
 import br.com.inatel.icc.pastebean.model.Paste;
 import br.com.inatel.icc.pastebean.model.PastePrivacy;
 import br.com.inatel.icc.pastebean.repository.PasteRepository;
@@ -35,7 +35,7 @@ public class PasteController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<PasteDto> createPaste(@RequestBody @Valid PasteFormDto pasteForm, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<PasteDto> createPaste(@RequestBody @Valid PasteForm pasteForm, UriComponentsBuilder uriBuilder) {
 		Paste paste = pasteForm.convert();
 		pasteRepository.save(paste);
 		
@@ -51,21 +51,18 @@ public class PasteController {
 	
 	@GetMapping("{id}")
 	public ResponseEntity<PasteDto> readPastes(@PathVariable Long id) {
-		Optional<Paste> pasteOptional = pasteRepository.findById(id);
-		
-		if(pasteOptional.isPresent()) {
-			return ResponseEntity.ok(new PasteDto(pasteOptional.get()));
+		Optional<Paste> paste = pasteRepository.findById(id);
+		if(paste.isPresent()) {
+			return ResponseEntity.ok(new PasteDto(paste.get()));
 		}
-		
 		return ResponseEntity.notFound().build();
 	}
 	
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<PasteDto> updatePastes(@PathVariable Long id, @RequestBody @Valid UpdatePasteFormDto pasteForm) {
-		Optional<Paste> pasteOptional = pasteRepository.findById(id);
-		
-		if(pasteOptional.isPresent()) {
+	public ResponseEntity<PasteDto> updatePastes(@PathVariable Long id, @RequestBody @Valid UpdatePasteForm pasteForm) {
+		Optional<Paste> optional = pasteRepository.findById(id);
+		if(optional.isPresent()) {
 			Paste paste = pasteForm.update(id, pasteRepository);
 			return ResponseEntity.ok(new PasteDto(paste));
 		}
@@ -76,9 +73,8 @@ public class PasteController {
 	@DeleteMapping("{id}")
 	@Transactional
 	public ResponseEntity<?> deletePastes(@PathVariable Long id) {
-		Optional<Paste> pasteOptional = pasteRepository.findById(id);
-		
-		if(pasteOptional.isPresent()) {
+		Optional<Paste> optional = pasteRepository.findById(id);
+		if(optional.isPresent()) {
 			pasteRepository.deleteById(id);
 			return ResponseEntity.ok().build();
 		}

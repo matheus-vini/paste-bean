@@ -1,4 +1,4 @@
-package br.com.inatel.icc.pastebean.controller.dto.form;
+package br.com.inatel.icc.pastebean.controller.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import br.com.inatel.icc.pastebean.controller.dto.UserDto;
 import br.com.inatel.icc.pastebean.model.Paste;
 import br.com.inatel.icc.pastebean.model.PastePrivacy;
 
-public class PasteFormDto {
+public class PasteForm {
 
 	private long id;
 	private UserDto user;
