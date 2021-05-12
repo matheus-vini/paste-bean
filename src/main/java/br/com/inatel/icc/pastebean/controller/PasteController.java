@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.inatel.icc.pastebean.controller.dto.PasteDto;
-import br.com.inatel.icc.pastebean.controller.dto.form.PasteFormDto;
-import br.com.inatel.icc.pastebean.controller.dto.form.UpdatePasteFormDto;
+import br.com.inatel.icc.pastebean.controller.form.PasteForm;
+import br.com.inatel.icc.pastebean.controller.form.UpdatePasteForm;
 import br.com.inatel.icc.pastebean.model.Paste;
 import br.com.inatel.icc.pastebean.model.PastePrivacy;
 import br.com.inatel.icc.pastebean.repository.PasteRepository;
@@ -35,7 +35,7 @@ public class PasteController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<PasteDto> createPaste(@RequestBody @Valid PasteFormDto pasteForm, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<PasteDto> createPaste(@RequestBody @Valid PasteForm pasteForm, UriComponentsBuilder uriBuilder) {
 		Paste paste = pasteForm.convert();
 		pasteRepository.save(paste);
 		
@@ -60,7 +60,7 @@ public class PasteController {
 	
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<PasteDto> updatePastes(@PathVariable Long id, @RequestBody @Valid UpdatePasteFormDto pasteForm) {
+	public ResponseEntity<PasteDto> updatePastes(@PathVariable Long id, @RequestBody @Valid UpdatePasteForm pasteForm) {
 		Optional<Paste> optional = pasteRepository.findById(id);
 		if(optional.isPresent()) {
 			Paste paste = pasteForm.update(id, pasteRepository);

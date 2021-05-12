@@ -1,9 +1,9 @@
-package br.com.inatel.icc.pastebean.controller.dto.form;
+package br.com.inatel.icc.pastebean.controller.form;
 
 import br.com.inatel.icc.pastebean.model.User;
 import br.com.inatel.icc.pastebean.repository.UserApi;
 
-public class UserFormDto {
+public class UserForm {
 	
 	private UserApi userApi = new UserApi();
 	
