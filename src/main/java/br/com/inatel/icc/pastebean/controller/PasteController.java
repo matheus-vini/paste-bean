@@ -39,7 +39,7 @@ public class PasteController {
 		Paste paste = pasteForm.convert();
 		pasteRepository.save(paste);
 		
-		URI uri = uriBuilder.path("Topico/{id}").buildAndExpand(paste.getId()).toUri();
+		URI uri = uriBuilder.path("pastes/{id}").buildAndExpand(paste.getId()).toUri();
 		return ResponseEntity.created(uri).body(new PasteDto(paste));
 	}
 	

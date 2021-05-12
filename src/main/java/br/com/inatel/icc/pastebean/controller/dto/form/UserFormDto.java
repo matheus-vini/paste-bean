@@ -5,7 +5,7 @@ import br.com.inatel.icc.pastebean.repository.UserApi;
 
 public class UserFormDto {
 	
-	private UserApi userApi;
+	private UserApi userApi = new UserApi();
 	
 	private String username;
 	private String password;
