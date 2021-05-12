@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,11 +33,12 @@ public class PasteController {
 	private PasteRepository pasteRepository;
 	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<PasteDto> createPaste(@RequestBody @Valid PasteFormDto pasteForm, UriComponentsBuilder uriBuilder) {
 		Paste paste = pasteForm.convert();
 		pasteRepository.save(paste);
 		
-		URI uri = uriBuilder.path("Topico/{id}").buildAndExpand(paste.getId()).toUri();
+		URI uri = uriBuilder.path("pastes/{id}").buildAndExpand(paste.getId()).toUri();
 		return ResponseEntity.created(uri).body(new PasteDto(paste));
 	}
 	
@@ -58,5 +60,12 @@ public class PasteController {
 		Paste paste = pasteForm.update(id, pasteRepository);
 		
 		return ResponseEntity.ok(new PasteDto(paste));
+	}
+	
+	@DeleteMapping("{id}")
+	@Transactional
+	public ResponseEntity<?> deletePastes(@PathVariable Long id) {
+		pasteRepository.deleteById(id);
+		return ResponseEntity.ok().build();
 	}
 }
