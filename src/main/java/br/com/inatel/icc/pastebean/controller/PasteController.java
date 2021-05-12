@@ -2,6 +2,7 @@ package br.com.inatel.icc.pastebean.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -49,23 +50,35 @@ public class PasteController {
 	}
 	
 	@GetMapping("{id}")
-	public PasteDto readPastes(@PathVariable Long id) {
-		Paste paste = pasteRepository.getOne(id);
-		return new PasteDto(paste);
+	public ResponseEntity<PasteDto> readPastes(@PathVariable Long id) {
+		Optional<Paste> paste = pasteRepository.findById(id);
+		if(paste.isPresent()) {
+			return ResponseEntity.ok(new PasteDto(paste.get()));
+		}
+		return ResponseEntity.notFound().build();
 	}
 	
 	@PutMapping("{id}")
 	@Transactional
 	public ResponseEntity<PasteDto> updatePastes(@PathVariable Long id, @RequestBody @Valid UpdatePasteFormDto pasteForm) {
-		Paste paste = pasteForm.update(id, pasteRepository);
+		Optional<Paste> optional = pasteRepository.findById(id);
+		if(optional.isPresent()) {
+			Paste paste = pasteForm.update(id, pasteRepository);
+			return ResponseEntity.ok(new PasteDto(paste));
+		}
 		
-		return ResponseEntity.ok(new PasteDto(paste));
+		return ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping("{id}")
 	@Transactional
 	public ResponseEntity<?> deletePastes(@PathVariable Long id) {
-		pasteRepository.deleteById(id);
-		return ResponseEntity.ok().build();
+		Optional<Paste> optional = pasteRepository.findById(id);
+		if(optional.isPresent()) {
+			pasteRepository.deleteById(id);
+			return ResponseEntity.ok().build();
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 }
