@@ -32,11 +32,13 @@ public class PasteController {
 	
 	@Autowired
 	private PasteRepository pasteRepository;
+	@Autowired
+	private UserSearch map;
 	
 	@PostMapping
 	@Transactional
 	public ResponseEntity<PasteDto> createPaste(@RequestBody @Valid PasteForm pasteForm, UriComponentsBuilder uriBuilder) {
-		Paste paste = pasteForm.convert();
+		Paste paste = pasteForm.convert(map);
 		pasteRepository.save(paste);
 		
 		URI uri = uriBuilder.path("pastes/{id}").buildAndExpand(paste.getId()).toUri();

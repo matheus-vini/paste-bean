@@ -47,6 +47,15 @@ public class UserController {
 		List<User> users = userRepository.findAll();
 		return UserDto.convert(users);
 	}
+	/*
+	@GetMapping("{id}")
+	public ResponseEntity<UserDto> readUsers(@PathVariable Long id) {
+		Optional<User> user = userRepository.findById(id);
+			if(user.isPresent()) {
+				return ResponseEntity.ok(new UserDto(user.get()));
+			}
+		return ResponseEntity.notFound().build();
+	}*/
 	
 	@PutMapping("{id}")
 	@Transactional
