@@ -13,9 +13,13 @@ import br.com.inatel.icc.pastebean.repository.UserRepository;
 @RestController
 public class UserSearch {
 
-	@Autowired
 	private UserRepository userRepository;
-	
+
+	@Autowired
+	public UserSearch(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
 	@GetMapping("users/{id}")
 	public User findUser(@PathVariable Long id) {
 		Optional<User> user = userRepository.findById(id);

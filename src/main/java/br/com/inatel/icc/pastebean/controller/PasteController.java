@@ -30,11 +30,15 @@ import br.com.inatel.icc.pastebean.repository.PasteRepository;
 @RequestMapping("pastes")
 public class PasteController {
 	
-	@Autowired
 	private PasteRepository pasteRepository;
-	@Autowired
 	private UserSearch map;
-	
+
+	@Autowired
+	public PasteController(PasteRepository pasteRepository, UserSearch map) {
+		this.pasteRepository = pasteRepository;
+		this.map = map;
+	}
+
 	@PostMapping
 	@Transactional
 	public ResponseEntity<PasteDto> createPaste(@RequestBody @Valid PasteForm pasteForm, UriComponentsBuilder uriBuilder) {

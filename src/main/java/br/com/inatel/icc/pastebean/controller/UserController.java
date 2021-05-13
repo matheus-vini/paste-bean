@@ -29,8 +29,12 @@ import br.com.inatel.icc.pastebean.repository.UserRepository;
 @RequestMapping("users")
 public class UserController {
 	
-	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	public UserController(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 	
 	@PostMapping
 	@Transactional
