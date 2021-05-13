@@ -3,9 +3,6 @@ package br.com.inatel.icc.pastebean.controller.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.ElementCollection;
-
-import br.com.inatel.icc.pastebean.model.Paste;
 import br.com.inatel.icc.pastebean.model.User;
 
 public class UserDto {
