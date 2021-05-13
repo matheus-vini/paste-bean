@@ -41,6 +41,10 @@ public class User {
 	public List<Paste> getUserPasteList() {
 		return userPasteList;
 	}
+	
+	public void setUserPasteList(Paste userPaste) {
+		this.userPasteList.add(userPaste);
+	}
 
 	public String getUsername() {
 		return username;

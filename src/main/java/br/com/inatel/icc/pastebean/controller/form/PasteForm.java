@@ -73,7 +73,9 @@ public class PasteForm {
 			return new Paste(privacy, title, content);
 		}
 		user = map.findUser(userId);
-		return new Paste(privacy, title, content, user);
+		Paste paste = new Paste(privacy, title, content, user);
+		user.setUserPasteList(paste);
+		return paste;
 	}
 
 }
