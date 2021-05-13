@@ -6,10 +6,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import br.com.inatel.icc.pastebean.config.db.Query;
+
 @Entity
 public class Paste {
 
-	private static long idCount = 0;
+	private static long idCount = Query.highestPasteId();
 	@Id
 	private long id;
 	@ManyToOne
