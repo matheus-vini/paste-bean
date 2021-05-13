@@ -7,10 +7,12 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import br.com.inatel.icc.pastebean.config.db.Query;
+
 @Entity
 public class User {
 
-	private static long idCount = 0;
+	private static long idCount = Query.highestUserId();
 	@Id
 	private long id;
 	private String username;
@@ -38,6 +40,10 @@ public class User {
 
 	public List<Paste> getUserPasteList() {
 		return userPasteList;
+	}
+	
+	public void setUserPasteList(Paste userPaste) {
+		this.userPasteList.add(userPaste);
 	}
 
 	public String getUsername() {
